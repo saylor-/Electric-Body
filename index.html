@@ -929,32 +929,97 @@
     /* ── VIDEO ── */
     .video-section { background: var(--bg); }
 
-    .video-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .video-btn-row {
+      display: flex;
       gap: 1.5rem;
+      justify-content: center;
       margin-top: 3rem;
+      flex-wrap: wrap;
     }
 
-    .video-wrapper {
+    .video-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1.1rem 2.4rem;
+      border-radius: 12px;
+      border: 1.5px solid var(--accent);
+      background: transparent;
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .15s;
+      font-family: inherit;
+      letter-spacing: .02em;
+    }
+
+    .video-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .video-btn .play-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+
+    .video-btn:hover .play-icon { background: rgba(255,255,255,.25); }
+
+    .video-btn .play-icon svg { width: 14px; height: 14px; fill: #fff; margin-left: 2px; }
+
+    /* Modal */
+    .video-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-modal-overlay.open { display: flex; }
+
+    .video-modal {
+      position: relative;
+      width: 90vw;
+      max-width: 480px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 16px 48px rgba(0,0,0,.4);
-      background: var(--card);
-      aspect-ratio: 9 / 16;
+      background: #000;
+      box-shadow: 0 32px 80px rgba(0,0,0,.7);
     }
 
-    .video-wrapper video {
+    .video-modal video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
       display: block;
     }
 
-    @media (max-width: 768px) {
-      .video-two-col { grid-template-columns: 1fr; }
-      .video-wrapper { aspect-ratio: 9 / 16; }
+    .video-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,.6);
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
     }
 
     /* ── FOOTER ── */
@@ -1258,20 +1323,26 @@
       <h2>Experience EMS Training</h2>
       <p>Watch what a real Electric Body session looks and feels like.</p>
     </div>
-    <div class="video-two-col">
-      <div class="video-wrapper">
-        <video controls preload="metadata" playsinline>
-          <source src="Media/copy_ED72B8B0-E0C2-42AE-92F3-7058BE76146D.MOV" type="video/mp4">
-        </video>
-      </div>
-      <div class="video-wrapper">
-        <video controls preload="metadata" playsinline>
-          <source src="Media/copy_D03C529B-7701-4E6F-9289-52EA4195ECA9.MOV" type="video/mp4">
-        </video>
-      </div>
+    <div class="video-btn-row">
+      <button class="video-btn" onclick="openVideoModal('Media/copy_ED72B8B0-E0C2-42AE-92F3-7058BE76146D.MOV')">
+        <span class="play-icon"><svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg></span>
+        EMS Video #1
+      </button>
+      <button class="video-btn" onclick="openVideoModal('Media/copy_D03C529B-7701-4E6F-9289-52EA4195ECA9.MOV')">
+        <span class="play-icon"><svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg></span>
+        EMS Video #2
+      </button>
     </div>
   </div>
 </section>
+
+<!-- Video Modal -->
+<div class="video-modal-overlay" id="videoModalOverlay" onclick="closeVideoModal(event)">
+  <div class="video-modal">
+    <button class="video-modal-close" onclick="closeVideoModal(null, true)">✕</button>
+    <video id="modalVideo" controls playsinline></video>
+  </div>
+</div>
 
 <div class="gradient-line"></div>
 
@@ -1482,7 +1553,7 @@
       No commitment required.
     </p>
     <div class="cta-actions">
-      <a href="mailto:heatherbenes@electricbody.net?subject=Book%20a%20Session%20at%20PH7%20Studio%20%E2%80%94%20Electric%20Body%20EMS&body=Hi%20Heather%2C%0A%0AI%27d%20love%20to%20book%20a%20session%20at%20PH7%20Studio.%0A%0AName%3A%20%0APreferred%20days%2Ftimes%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="btn-primary">⚡ Book at PH7</a>
+      <a href="mailto:heatherbenes@electricbody.net?subject=Book%20a%20Session%20at%20PH7%20Studio%20%E2%80%94%20Electric%20Body%20EMS&body=Hi%20Electric%20Body%2C%0A%0AI%27d%20love%20to%20book%20a%20session%20at%20PH7%20Studio.%0A%0AName%3A%20%0APreferred%20days%2Ftimes%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="btn-primary">⚡ Book at PH7</a>
       <a href="https://denversportsrecovery.com/treatments/ems-fitness" target="_blank" class="btn-ghost" style="border-color: rgba(255,255,255,.5); color: var(--white);">Book at Denver Sports Recovery →</a>
     </div>
   </div>
@@ -1563,6 +1634,24 @@
     el.style.transition = 'opacity .5s ease, transform .5s ease';
     observer.observe(el);
   });
+
+  function openVideoModal(src) {
+    const video = document.getElementById('modalVideo');
+    video.src = src;
+    document.getElementById('videoModalOverlay').classList.add('open');
+    video.play();
+  }
+
+  function closeVideoModal(e, force) {
+    if (force || (e && e.target === document.getElementById('videoModalOverlay'))) {
+      const video = document.getElementById('modalVideo');
+      video.pause();
+      video.src = '';
+      document.getElementById('videoModalOverlay').classList.remove('open');
+    }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(null, true); });
 </script>
 </body>
 </html>
