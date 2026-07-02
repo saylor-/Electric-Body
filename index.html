@@ -1101,6 +1101,59 @@
       .footer-bottom { flex-direction: column; gap: .5rem; text-align: center; }
     }
 
+    /* ── Team ── */
+    .team-section { background: var(--bg); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.4);
+    }
+
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .team-info {
+      padding: 1.5rem 1.25rem 1.75rem;
+    }
+
+    .team-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .35rem;
+    }
+
+    .team-info p {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; }
+    }
+
     /* ── Divider gradient line ── */
     .gradient-line {
       height: 1px;
@@ -1316,6 +1369,42 @@
         <div class="benefit-icon">🦴</div>
         <h3>Joint-Friendly</h3>
         <p>Low-impact by design. Perfect for injury recovery, seniors, or anyone who needs gentle yet effective training.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ══════════════════ TEAM ══════════════════ -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-label">Our Team</div>
+      <h2>Meet Your Trainers</h2>
+      <p>Expert coaches dedicated to getting you results safely and efficiently.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card fade-in">
+        <img class="team-photo" src="Media/amy-bailey.jpg" alt="Amy Bailey" />
+        <div class="team-info">
+          <h3>Amy Bailey</h3>
+          <p>Fitness junkie and former competitive soccer and tennis player. EMS personal trainer with high-energy motivational coaching style.</p>
+        </div>
+      </div>
+      <div class="team-card fade-in">
+        <img class="team-photo" src="Media/heather-benes.jpg" alt="Heather Benes" />
+        <div class="team-info">
+          <h3>Heather Benes</h3>
+          <p>Degree in Psychology and Health Education. Established Electric Body LLC in 2022. Focuses on EMS, mobility, and mental wellness.</p>
+        </div>
+      </div>
+      <div class="team-card fade-in">
+        <img class="team-photo" src="Media/katrina-benes.jpg" alt="Katrina Benes" />
+        <div class="team-info">
+          <h3>Katrina Benes</h3>
+          <p>Certified personal trainer and EMS instructor. Recovering runner and outdoor enthusiast. Mom of three with an energetic coaching style.</p>
+        </div>
       </div>
     </div>
   </div>
